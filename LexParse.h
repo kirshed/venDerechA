@@ -7,19 +7,25 @@
 
 #include <list>
 #include <string>
+#include <vector>
+#include <map>
 #include "string.h"
 #include "fstream"
-
+#include "CommandExpression.h"
+enum comEnum{SERVER, CONNECT, VAR, WHILE, IF, SLEEP, OTHER};
 using namespace std;
 
 
 class LexParse {
-    list<string> lexed;
+    vector<string> lexed;
+    map<string, Expression*> ceMap;
+    map<string, double> varMap;
 public:
     LexParse(){
         list<string> lexed;
     }
     void lexer(ifstream& data);
+    void parser();
 };
 
 
