@@ -10,10 +10,11 @@
 
 class ConnectCommand: public Command {
 public:
-    ConnectCommand(){
-
+    queue <string> args;
+    ConnectCommand(queue <string> ar){
+        args = ar;
     }
-    virtual int doCommand();
+    virtual double doCommand();
 };
 
 

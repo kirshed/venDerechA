@@ -8,11 +8,12 @@
 #include "Command.h"
 
 class SleepCommand: public Command {
+    queue <string> args;
 public:
-    SleepCommand(){
-
+    SleepCommand(queue <string> ar){
+        args = ar;
     }
-    virtual int doCommand();
+    virtual double doCommand();
 };
 
 

@@ -8,8 +8,11 @@
 #include "Command.h"
 class PrintCommand: public Command {
 public:
-    PrintCommand(){}
-    virtual int doCommand();
+    queue <string> args;
+    PrintCommand(queue <string> ar){
+        args = ar;
+    }
+    virtual double doCommand();
 };
 
 

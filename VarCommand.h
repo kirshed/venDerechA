@@ -9,12 +9,13 @@
 #include "Command.h"
 
 class VarCommand: public Command {
+    queue<string> args;
 public:
-    VarCommand(){
-
+    VarCommand(queue<string> ar) {
+        args = ar;
     }
 
-    virtual int doCommand();
+    virtual double doCommand();
 
 };
 

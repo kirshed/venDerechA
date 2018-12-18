@@ -4,10 +4,17 @@
 
 #ifndef UNTITLED5_COMMAND_H
 #define UNTITLED5_COMMAND_H
+#include <iostream>
+#include <queue>
+#include "Expression.h"
+#include "Shunting.h"
+#include <pthread.h>
+
+using namespace std;
 
 class Command{
 public:
-    virtual int doCommand() = 0;
+    virtual double doCommand(queue <string> args) = 0;
 };
 
 #endif //UNTITLED5_COMMAND_H

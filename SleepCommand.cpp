@@ -3,7 +3,15 @@
 //
 
 #include "SleepCommand.h"
+#include <unistd.h>
+#include <chrono>
+#include <thread>
 
-int SleepCommand::doCommand() {
+using namespace std;
 
+double SleepCommand::doCommand() {
+    Shunting shunt = Shunting();
+    double sleepTime = shunt.evaluate(args.front())->calculate();
+    this_thread::sleep_for(chrono::milliseconds(int(sleepTime)));
+    args.pop();
 }

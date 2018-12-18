@@ -4,4 +4,4 @@
 
 #include "IfCommand.h"
 
-int IfCommand:: doCommand(){}
+double IfCommand:: doCommand(){}

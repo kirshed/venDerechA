@@ -34,7 +34,7 @@ void LexParse:: parser(){
             ceMap.insert(pair<string, Expression*> (lexed[i],
                     new CommandExpression(new OpenDataServerCommand())));
 
-            
+
         }
         else if(str == "Connect"){
             ceMap.insert(pair<string, Expression*> (lexed[i],

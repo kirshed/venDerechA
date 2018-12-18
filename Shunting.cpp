@@ -9,6 +9,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+//NEED TO DEAL WITH NEGATIVES AND DECIMALS
+
 // Function to find precedence of
 // operators.
 int Shunting:: getPrec(char op) const{
@@ -143,11 +145,10 @@ Expression* Shunting:: evaluate(string tokens){
     return values.top();
 }
 
-string Shunting::getStr() {return this->myStr;}
 
 int main() {
-    Shunting sh = Shunting("100 * ( 2 + 12 ) / 14");
-    Expression* e = sh.evaluate(sh.getStr());
+    Shunting sh = Shunting();
+    Expression* e = sh.evaluate("100 * ( 2 + 12 ) / 14");
     cout<< e->calculate();
     return 0;
 }

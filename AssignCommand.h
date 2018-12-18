@@ -10,11 +10,12 @@
 
 class AssignCommand: public Command {
 public:
-    AssignCommand(){
-
+    queue <string> args;
+    AssignCommand(queue <string> ar){
+        args = ar;
     }
 
-    virtual int doCommand();
+    virtual double doCommand();
 
 };
 

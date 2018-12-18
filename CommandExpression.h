@@ -16,7 +16,7 @@
 #include "AssignCommand.h"
 #include "IfCommand.h"
 #include "VarCommand.h"
-#include "BindCommand.h"
+#include "VarBindCommand.h"
 
 class CommandExpression: public Expression {
     Command* myCom;

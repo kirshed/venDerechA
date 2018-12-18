@@ -4,6 +4,6 @@
 
 #include "ConnectCommand.h"
 
-int ConnectCommand:: doCommand(){
+double ConnectCommand:: doCommand(){
 
 }

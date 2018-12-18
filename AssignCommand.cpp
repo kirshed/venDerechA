@@ -4,4 +4,4 @@
 
 #include "AssignCommand.h"
 
-int AssignCommand::doCommand() {}
+double AssignCommand::doCommand() {}

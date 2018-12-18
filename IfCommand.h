@@ -10,11 +10,12 @@
 
 class IfCommand: public Command {
 public:
-    IfCommand(){
-
+    queue <string> args;
+    IfCommand(queue <string> ar){
+        args = ar;
     }
 
-    virtual int doCommand();
+    virtual double doCommand();
 };
 
 

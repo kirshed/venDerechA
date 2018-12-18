@@ -16,10 +16,8 @@ using namespace std;
 
 class Shunting {
     map<char, int> precedence;
-    string myStr;
 public:
-    Shunting(string str){
-        myStr = str;
+    Shunting(){
         precedence.insert(pair<char, int>('+', 1));
         precedence.insert(pair<char, int>('-', 1));
         precedence.insert(pair<char, int>('*', 2));

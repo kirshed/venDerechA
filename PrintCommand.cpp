@@ -4,4 +4,11 @@
 
 #include "PrintCommand.h"
 
-int PrintCommand::doCommand() {}
+using namespace std;
+
+double PrintCommand::doCommand() {
+    string strPrint = args.front();
+    args.pop();
+    cout <<strPrint <<endl;
+    return 0;
+}

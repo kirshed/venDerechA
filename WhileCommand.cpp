@@ -4,4 +4,4 @@
 
 #include "WhileCommand.h"
 
-int WhileCommand::doCommand() {}
+double WhileCommand::doCommand() {}

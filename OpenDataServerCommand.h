@@ -15,10 +15,11 @@ using namespace std;
 
 class OpenDataServerCommand: public Command {
 public:
-    OpenDataServerCommand(){
-
+    queue <string> args;
+    OpenDataServerCommand(queue <string> ar){
+        args = ar;
     }
-    virtual int doCommand();
+    virtual double doCommand();
 };
 
 
