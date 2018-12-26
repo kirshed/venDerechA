@@ -8,11 +8,15 @@
 
 #include "Command.h"
 
+extern mapsData data;
+
 class AssignCommand: public Command {
 public:
     queue <string> args;
-    AssignCommand(queue <string> ar){
-        args = ar;
+    AssignCommand(queue <string> &ar) : args(ar){
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
 
     virtual double doCommand();

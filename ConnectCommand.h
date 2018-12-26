@@ -6,14 +6,18 @@
 #define UNTITLED5_CONNECTCOMMAND_H
 
 #include "Command.h"
+#include "ClientWriter.h"
 
 
 class ConnectCommand: public Command {
-public:
     queue <string> args;
-    ConnectCommand(queue <string> ar){
-        args = ar;
+public:
+    ConnectCommand(queue <string> &ar) : args(ar){
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
+    static void openWriter(queue<string> args);
     virtual double doCommand();
 };
 

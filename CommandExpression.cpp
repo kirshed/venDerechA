@@ -5,5 +5,5 @@
 #include "CommandExpression.h"
 
 double CommandExpression:: calculate() const{
-    //this->myCom->doCommand();
+    this->myCom->doCommand();
 }
