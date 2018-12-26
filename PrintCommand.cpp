@@ -7,8 +7,9 @@
 using namespace std;
 
 double PrintCommand::doCommand() {
-    string strPrint = args.front();
-    args.pop();
+    queue<string> tempArgs = args;
+    string strPrint = tempArgs.front();
+    tempArgs.pop();
     cout <<strPrint <<endl;
     return 0;
 }

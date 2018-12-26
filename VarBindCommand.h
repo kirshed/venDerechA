@@ -8,11 +8,15 @@
 
 #include "Command.h"
 
+extern mapsData data;
+
 class VarBindCommand: public Command {
     queue<string> args;
 public:
-    VarBindCommand(queue<string> ar){
-        args = ar;
+    VarBindCommand(queue<string> &ar) : args(ar){
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
 
     virtual double doCommand();

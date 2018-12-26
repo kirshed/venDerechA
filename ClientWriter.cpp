@@ -58,6 +58,7 @@ double ClientWriter::writeToServer() {
             double value = data.getvaluebyvar(data.getNewVar());
             buffer = "set " + path + " "+ to_string(value) + " \r\n";
             const char *charBuf = buffer.c_str();
+            cout<< "made it"<< endl;
             n = write(sockfd, charBuf, strlen(charBuf));
             //because i already updated the most recent var
             data.setIsNewData(false);

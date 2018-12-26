@@ -10,8 +10,9 @@
 using namespace std;
 
 double SleepCommand::doCommand() {
+    queue<string> tempArgs = args;
     Shunting shunt = Shunting();
-    double sleepTime = shunt.evaluate(args.front())->calculate();
+    double sleepTime = shunt.evaluate(tempArgs.front())->calculate();
     this_thread::sleep_for(chrono::milliseconds(int(sleepTime)));
-    args.pop();
+    tempArgs.pop();
 }

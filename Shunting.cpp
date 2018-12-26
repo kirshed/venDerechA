@@ -36,9 +36,9 @@ Expression* Shunting:: applyOp(Expression* a, Expression* b, char op){
 
 // Function that returns value of
 // expression after evaluation.
-Expression* Shunting:: evaluate(string tokens){
+Expression* Shunting:: evaluate(string exp){
+    string tokens = fixString(exp);
     int i;
-
     // stack to store integer values.
     stack <Expression*> values;
 
@@ -56,14 +56,12 @@ Expression* Shunting:: evaluate(string tokens){
             // brace, push it to 'ops'
         else if(tokens[i] == '('){
             ops.push(tokens[i]);
-            //CHECK IF NECESSARY
-            //i++;
         }
 
             // Current token is a number, push
             // it to stack for numbers.
         else if(isdigit(tokens[i])){
-            int val = 0;
+            double val = 0;
 
             // There may be more than one
             // digits in number.
@@ -73,6 +71,22 @@ Expression* Shunting:: evaluate(string tokens){
                 val = (val*10) + (tokens[i]-'0');
                 i++;
             }
+            if((i < tokens.length() &&tokens[i] == '.')){
+                i++;
+                double div = 10;
+                double dec = (tokens[i]-'0')/div;
+                div*=10;
+                i++;
+                while(i < tokens.length() &&
+                      isdigit(tokens[i]))
+                {
+                    dec = dec + (tokens[i]-'0')/div;
+                    div*=10;
+                    i++;
+                }
+                val = val+dec;
+            }
+            i--;
             Expression* valEx = new Number(val);
             values.push(valEx);
         }
@@ -96,18 +110,35 @@ Expression* Shunting:: evaluate(string tokens){
 
             // pop opening brace.
             ops.pop();
-            //CHECK IF NECESSARY
-            //i++;
         }
 
+        //letter - CHECK THIS
+        else if(tokens[i]!='+'&&tokens[i]!='-'&&tokens[i]!='*'&&tokens[i]!='/'){
+            string valString;
+            //will find string from map
+            while(tokens[i]!='+'&&tokens[i]!='-'&&tokens[i]!='*'&&tokens[i]!='/'&& !isdigit(tokens[i])&&i<tokens.size()){
+                valString+=tokens[i];
+                i++;
+            }
+            //once i get to the end of the symbol name we need to decrease i because we increase i in the loop
+            i--;
+            //should prob change this to double
+            int myVal = int(data.getSymbolTable().at(valString));
+            Expression* exVal = new Number(myVal);
+            values.push(exVal);
+        }
             // Current token is an operator.
         else
         {
+
             // While top of 'ops' has same or greater
             // precedence to current token, which
             // is an operator. Apply operator on top
             // of 'ops' to top two elements in values stack.
             while(!ops.empty() && getPrec(ops.top()) >= getPrec(tokens[i])){
+                if(values.size()<2){
+
+                }
                 Expression* val2 = values.top();
                 values.pop();
 
@@ -119,7 +150,6 @@ Expression* Shunting:: evaluate(string tokens){
 
                 values.push(applyOp(val1, val2, op));
             }
-
             // Push current token to 'ops'.
             ops.push(tokens[i]);
         }
@@ -141,14 +171,39 @@ Expression* Shunting:: evaluate(string tokens){
         values.push(applyOp(val1, val2, op));
     }
 
+    stack <Expression*> retValues = values;
     // Top of 'values' contains result, return it.
-    return values.top();
+    return retValues.top();
 }
 
+string Shunting:: fixString(string tokens){
+    string digit;
+    string final = "";
+    for(int i = 0; i<tokens.size(); i++){
+        string num = "";
+        if(tokens[i] == '-'&&(tokens[i-1] == '*'||tokens[i-1] == '/')){
+            //string until before -
+            string beg = tokens.substr(0, i);
+            i++;
+            while(isdigit(tokens[i])||tokens[i] == '.'){
+                string digit(1,tokens[i]);
+                num+=digit;
+                i++;
+            }
+            string end = tokens.substr(i, tokens.size());
+            tokens = beg+"(0-"+num+")"+end;
+        }
+    }
+    //if the string starts with 0
+    if(tokens[0] == '-'){
+        tokens = "0"+tokens;
+    }
+    return tokens;
+}
 
-int main() {
+/*int main() {
     Shunting sh = Shunting();
-    Expression* e = sh.evaluate("100 * ( 2 + 12 ) / 14");
+    Expression* e = sh.evaluate("12.2*4");
     cout<< e->calculate();
     return 0;
-}
+}*/

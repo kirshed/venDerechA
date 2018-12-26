@@ -10,17 +10,26 @@
 #include <arpa/inet.h>
 #include <string.h>
 #include <string>
+#include <chrono>
+#include <thread>
 #include "OpenDataServerCommand.h"
 
 using namespace std;
 
-double OpenDataServerCommand:: doCommand(){
-    Shunting shunt = Shunting();
-    double readSpeed = shunt.evaluate(args.front())->calculate();
-    args.pop();
-    double port = shunt.evaluate(args.front())->calculate();
-    args.pop();
 
+void OpenDataServerCommand:: openReader(int new_socket, double readSpeed){
+    OpenDataReader serverReader = OpenDataReader();
+    serverReader.reader(new_socket, readSpeed);
+}
+
+double OpenDataServerCommand::doCommand() {
+    queue<string> tempArgs = args;
+    Shunting shunt = Shunting();
+    double port = shunt.evaluate(tempArgs.front())->calculate();
+    tempArgs.pop();
+    double readSpeed = shunt.evaluate(tempArgs.front())->calculate();
+    tempArgs.pop();
+    /*
     // Create a socket
     int listening = socket(AF_INET, SOCK_STREAM, 0);
     if (listening == -1)
@@ -96,6 +105,28 @@ double OpenDataServerCommand:: doCommand(){
     close(clientSocket);
 
     return 0;
-
-
+*/
+    int server_fd, new_socket, valread;
+    //char buffer[1024];
+    struct sockaddr_in address;
+    int addrlen = sizeof(address);
+    server_fd = socket(AF_INET, SOCK_STREAM, 0);
+    address.sin_family = AF_INET;
+    address.sin_addr.s_addr = INADDR_ANY;
+    address.sin_port = htons(port);
+    bind(server_fd, (struct sockaddr *) &address, sizeof(address));
+    listen(server_fd, 5);
+    if ((new_socket = accept(server_fd, (struct sockaddr *) &address,
+                             (socklen_t*) &addrlen)) < 0) {
+        perror("accept");
+        exit(EXIT_FAILURE);
+    }
+    //WILL OPEN A THREAD HERE
+    //openReader(new_socket, buffer, readSpeed);
+    thread first(openReader, new_socket, readSpeed);
+    first.detach();
+    sleep(30);
+    //while (true){}
+    //return myReader.Reader();
+    return 0;
 }

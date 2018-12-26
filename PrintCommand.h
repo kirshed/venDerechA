@@ -9,8 +9,10 @@
 class PrintCommand: public Command {
 public:
     queue <string> args;
-    PrintCommand(queue <string> ar){
-        args = ar;
+    PrintCommand(queue <string> &ar) : args(ar){
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
     virtual double doCommand();
 };

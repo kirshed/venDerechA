@@ -5,13 +5,17 @@
 #ifndef UNTITLED5_WHILECOMMAND_H
 #define UNTITLED5_WHILECOMMAND_H
 
+#include <queue>
+#include "Expression.h"
 #include "Command.h"
 
 class WhileCommand: public Command {
-    queue <string> args;
+    queue <Expression*> args;
 public:
-    WhileCommand(queue <string> ar){
-        args = ar;
+    WhileCommand(queue <Expression*> &ar) : args(ar){
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
     virtual double doCommand();
 };

@@ -1,32 +1,36 @@
 //
 // Created by daniella on 12/16/18.
 //
+#ifndef UNTITLED9_LEXPARSE_H
+#define UNTITLED9_LEXPARSE_H
 
-#ifndef UNTITLED5_EXPARSE_H
-#define UNTITLED5_EXPARSE_H
 
-#include <list>
 #include <string>
 #include <vector>
 #include <map>
 #include "string.h"
 #include "fstream"
 #include "CommandExpression.h"
-enum comEnum{SERVER, CONNECT, VAR, WHILE, IF, SLEEP, OTHER};
+#include <queue>
+#include <iostream>
+
 using namespace std;
 
 
 class LexParse {
-    vector<string> lexed;
-    map<string, Expression*> ceMap;
-    map<string, double> varMap;
 public:
-    LexParse(){
-        list<string> lexed;
+    map<int, vector<string>> commandsMap;
+    map<char, int> sign;
+
+    LexParse() {
+
     }
-    void lexer(ifstream& data);
-    void parser();
+
+    void lexer(vector<string> lines);
+    void initializeSign();
+    vector<string> createString(string l);
+    vector<string> fromStringToExp(vector<string> str);
+    vector<CommandExpression*> parser(map<int, vector<string>> commandsMap);
 };
 
-
-#endif //UNTITLED5_EXPARSE_H
+#endif //UNTITLED9_LEXPARSE_H

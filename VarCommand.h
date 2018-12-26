@@ -7,12 +7,17 @@
 
 
 #include "Command.h"
+#include "mapsData.h"
+
+extern mapsData data;
 
 class VarCommand: public Command {
     queue<string> args;
 public:
-    VarCommand(queue<string> ar) {
-        args = ar;
+    VarCommand(queue<string> &ar) : args(ar) {
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
 
     virtual double doCommand();

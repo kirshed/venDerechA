@@ -10,9 +10,11 @@
 
 class IfCommand: public Command {
 public:
-    queue <string> args;
-    IfCommand(queue <string> ar){
-        args = ar;
+    queue <Expression*> args;
+    IfCommand(queue <Expression*> &ar) : args(ar){
+        while(!ar.empty()){
+            ar.pop();
+        }
     }
 
     virtual double doCommand();

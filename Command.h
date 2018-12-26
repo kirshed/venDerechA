@@ -14,7 +14,7 @@ using namespace std;
 
 class Command{
 public:
-    virtual double doCommand(queue <string> args) = 0;
+    virtual double doCommand() = 0;
 };
 
 #endif //UNTITLED5_COMMAND_H

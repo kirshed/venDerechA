@@ -17,6 +17,7 @@
 #include "IfCommand.h"
 #include "VarCommand.h"
 #include "VarBindCommand.h"
+#include "ConditionCommand.h"
 
 class CommandExpression: public Expression {
     Command* myCom;

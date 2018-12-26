@@ -10,9 +10,11 @@
 #include "Mul.h"
 #include "Div.h"
 #include "Number.h"
-
+#include "mapsData.h"
 
 using namespace std;
+
+extern mapsData data;
 
 class Shunting {
     map<char, int> precedence;
@@ -27,6 +29,7 @@ public:
     Expression* applyOp(Expression* a, Expression* b, char op);
     Expression* evaluate(string tokens);
     string getStr();
+    string fixString(string exp);
 };
 
 

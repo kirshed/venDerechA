@@ -4,10 +4,15 @@
 
 #include "VarCommand.h"
 
-//one option: var a = 50*100 or any expression
+
 double VarCommand:: doCommand(){
+    queue<string> tempArgs = args;
     Shunting myShunt = Shunting();
-    double value = myShunt.evaluate(args.front())->calculate();
-    args.pop();
+    string var = tempArgs.front();
+    tempArgs.pop();
+    double value = myShunt.evaluate(tempArgs.front())->calculate();
+    tempArgs.pop();
+    //adding new var and value to symbolTable
+    data.addSymbol(var, value);
     return value;
 }
