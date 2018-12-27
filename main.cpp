@@ -9,32 +9,26 @@
 
 mapsData data = mapsData();
 
-int main() {
+/*int main() {
     map<string, double> symbolTable = {};
     map<string, string> varPaths = {};
     map<string, double> pathValues = {};
-    queue <string> args;
-   /*args.push("10+2>5+1");
-    CommandExpression* conEx = new CommandExpression(new ConditionCommand(args));
-    args.push("airspeed");
-    args.push("/instrumentation/airspeed-indicator/indicated-speed-kt");
-    CommandExpression* bindEx = new CommandExpression(new VarBindCommand(args));
-    bindEx->calculate();
-    args.push("airspeed");
-    args.push("15");
-    CommandExpression* assEx = new CommandExpression(new AssignCommand(args));
-    assEx->calculate();
+    queue<string> args;
+    args.push("breaks");
+    args.push("/controls/flight/speedbrake");
+    VarBindCommand vbind = VarBindCommand(args);
+    vbind.doCommand();
+    args.push("breaks");
+    args.push("20");
+    AssignCommand ascom = AssignCommand(args);
+    ascom.doCommand();
     args.push("5402");
     args.push("127.0.0.1");
     ConnectCommand cli = ConnectCommand(args);
-    cli.doCommand();*/
-   args.push("5400");
-   args.push("10");
-   OpenDataServerCommand ser = OpenDataServerCommand(args);
-   ser.doCommand();
+    cli.doCommand();
     pthread_exit(NULL);
     return 0;
-};
+};*/
 
 
 #include <string>
@@ -44,7 +38,7 @@ int main() {
 #include "fstream"
 #include <iostream>
 
-/*
+
 int main(int argc, char *argv[]) {
 
     if (argc != 2) {
@@ -68,10 +62,15 @@ int main(int argc, char *argv[]) {
     myFile.close();
 
     //send the string vector to LexParse
-    lexParse.lexer(lines);
+    try {
+        lexParse.lexer(lines);
+    }   catch (const char* s)   {
+        cout << s << endl;
+    }
+
     while (true){};
 
     return 0;
-}*/
+}
 
 #endif //UNTITLED5_MAIN_H

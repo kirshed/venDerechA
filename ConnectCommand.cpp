@@ -14,6 +14,7 @@ double ConnectCommand:: doCommand(){
     queue<string> tempArgs = args;
     ClientWriter myClient = ClientWriter(tempArgs);
     thread second(openWriter, tempArgs);
-    second.join();
+    second.detach();
+    //while (true){}
     return 0;
 }

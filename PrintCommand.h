@@ -6,6 +6,10 @@
 #define UNTITLED5_PRINTCOMMAND_H
 
 #include "Command.h"
+#include "mapsData.h"
+
+extern mapsData data;
+
 class PrintCommand: public Command {
 public:
     queue <string> args;

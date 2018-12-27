@@ -15,6 +15,9 @@ map<string, string> mapsData::getVarPaths() {
 map<string, double> mapsData::getPathValues() {
     return pathValues;
 }
+void mapsData:: addPathAndDouble(string path, double value){
+    pathValues.insert(pair<string, double> (path, value));
+}
 
 void mapsData::addSymbol(string str, double dbl) {
     symbolTable.insert(pair<string, double>(str, dbl));
@@ -64,8 +67,8 @@ int mapsData:: addSymAndDoubleByPath(string v, string p){
             return 1;
         }
     }
-    //if no path was found
-    throw "no such path";
+    //path does not exist in xml
+    return 0;
 }
 
 //updates path according to index
@@ -134,7 +137,7 @@ void mapsData:: updatePathDoubleByVar(string var, double value){
             }
         }
     }
-    throw "could not update path value";
+    //throw "could not update path value";
 }
 
 void mapsData::setIsNewData(bool isNew) {
@@ -145,12 +148,12 @@ bool mapsData:: getIsNewData(){
     return isNewData;
 }
 
-void mapsData::setNewVar(string str) {
-    newVar = str;
+void mapsData::addNewVar(string str) {
+    newVars.push(str);
 }
 
-string mapsData::getNewVar(){
-    return newVar;
+queue<string>* mapsData::getNewVars(){
+    return &newVars;
 }
 
 string mapsData:: getPathByVar(string var){
@@ -167,4 +170,10 @@ double mapsData:: getvaluebyvar(string var){
            return it->second;
        }
    }
+}
+unsigned long int mapsData:: getPathNum(){
+    return pathNum;
+}
+void mapsData:: setPathNum(unsigned long int pNum){
+    pathNum = pNum;
 }

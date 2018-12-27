@@ -115,15 +115,15 @@ Expression* Shunting:: evaluate(string exp){
         //letter - CHECK THIS
         else if(tokens[i]!='+'&&tokens[i]!='-'&&tokens[i]!='*'&&tokens[i]!='/'){
             string valString;
-            //will find string from map
-            while(tokens[i]!='+'&&tokens[i]!='-'&&tokens[i]!='*'&&tokens[i]!='/'&& !isdigit(tokens[i])&&i<tokens.size()){
+            //will find string from map - removed isdigit check.
+            while(tokens[i]!='+'&&tokens[i]!='-'&&tokens[i]!='*'&&tokens[i]!='/'&&i<tokens.size()&&tokens[i]!=')'){
                 valString+=tokens[i];
                 i++;
             }
             //once i get to the end of the symbol name we need to decrease i because we increase i in the loop
             i--;
             //should prob change this to double
-            int myVal = int(data.getSymbolTable().at(valString));
+            double myVal = int(data.getSymbolTable().at(valString));
             Expression* exVal = new Number(myVal);
             values.push(exVal);
         }

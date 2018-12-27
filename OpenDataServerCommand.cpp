@@ -125,7 +125,7 @@ double OpenDataServerCommand::doCommand() {
     //openReader(new_socket, buffer, readSpeed);
     thread first(openReader, new_socket, readSpeed);
     first.detach();
-    sleep(30);
+    //sleep(30);
     //while (true){}
     //return myReader.Reader();
     return 0;

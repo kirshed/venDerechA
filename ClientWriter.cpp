@@ -2,17 +2,20 @@
 // Created by daniella on 12/22/18.
 //
 
+#include <mutex>
 #include "ClientWriter.h"
+
+mutex myMutex;
 
 double ClientWriter::writeToServer() {
 
     queue<string> tempArgs = args;
 
     Shunting shunt = Shunting();
+    string ip = tempArgs.front();
+    tempArgs.pop();
     string portStr = tempArgs.front();
     double portNum =  shunt.evaluate(portStr)->calculate();
-    tempArgs.pop();
-    string ip = tempArgs.front();
     tempArgs.pop();
     int sockfd, n;
     struct sockaddr_in serv_addr;
@@ -54,19 +57,27 @@ double ClientWriter::writeToServer() {
 
     while(true){
         if(data.getIsNewData()){
-            string path = data.getPathByVar(data.getNewVar());
-            double value = data.getvaluebyvar(data.getNewVar());
-            buffer = "set " + path + " "+ to_string(value) + " \r\n";
-            const char *charBuf = buffer.c_str();
-            cout<< "made it"<< endl;
-            n = write(sockfd, charBuf, strlen(charBuf));
-            //because i already updated the most recent var
-            data.setIsNewData(false);
-            if (n < 0) {
-                perror("ERROR writing to socket");
-                exit(1);
+            queue<string>* newVars = data.getNewVars();
+            while(!newVars->empty()){
+                string path = data.getPathByVar(newVars->front());
+                double value = data.getvaluebyvar(newVars->front());
+                newVars->pop();
+                buffer = "set " + path + " "+ to_string(value) + " \r\n";
+                const char *charBuf = buffer.c_str();
+                cout<< buffer<< endl;
+                //myMutex.lock();
+                n = write(sockfd, charBuf, strlen(charBuf));
+                //myMutex.unlock();
+                //because i already updated the most recent var
+                data.setIsNewData(false);
+                //myMutex.unlock();
+                if (n < 0) {
+                    perror("ERROR writing to socket");
+                    exit(1);
+                }
             }
         }
+        //cout<<"made it"<<endl;
     }
     /* Send message to the server */
 

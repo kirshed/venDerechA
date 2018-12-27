@@ -18,9 +18,12 @@
 #include <string>
 #include <chrono>
 #include <thread>
+#include <mutex>
 #include "OpenDataServerCommand.h"
 
 using namespace std;
+
+mutex myMu;
 
 double OpenDataReader::reader(int new_socket, double readSpeed) {
     /*while(myRead>=0){
@@ -68,10 +71,15 @@ double OpenDataReader::reader(int new_socket, double readSpeed) {
             n = read(new_socket, &c, 1);
             data += c;
         }
-        cout<< data<< endl;
         char *cstr = new char[data.length() + 1];
         strcpy(cstr, data.c_str());
+        myMu.lock();
         updateMaps(cstr, 0);
+        myMu.unlock();
+        cout<< data<< endl;
+        data = "";
+        c = '\0';
+        sleep(1/readSpeed);
     }
 }
 

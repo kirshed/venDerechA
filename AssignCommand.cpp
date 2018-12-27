@@ -17,7 +17,7 @@ double AssignCommand::doCommand() {
         //update path double map according to var path map
         data.updatePathDoubleByVar(var, value);
         data.setIsNewData(true);
-        data.setNewVar(var);
+        data.addNewVar(var);
     }
 
 }

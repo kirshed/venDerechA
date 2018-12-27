@@ -6,6 +6,7 @@
 #define UNTITLED5_MAPSDATA_H
 
 #include <map>
+#include <queue>
 #include "string.h"
 
 using namespace std;
@@ -15,16 +16,19 @@ class mapsData {
     map<string, string> varPaths;
     map<string, double> pathValues;
     bool isNewData;
-    string newVar;
+    queue<string> newVars;
+    unsigned long int pathNum;
 public:
     mapsData(){
         makePathValues();
         isNewData = false;
+        pathNum = 24;
     }
 
     map<string, double> getSymbolTable();
     map<string, string> getVarPaths();
     map<string, double> getPathValues();
+    void addPathAndDouble(string path, double value);
     void addSymbol(string str, double dbl);
     void makePathValues();
     void addVPath(string v, string p);
@@ -36,10 +40,12 @@ public:
     void updatePathDoubleByVar(string var, double value);
     void setIsNewData(bool isNew);
     bool getIsNewData();
-    void setNewVar(string str);
-    string getNewVar();
+    void addNewVar(string str);
+    queue<string>* getNewVars();
     string getPathByVar(string var);
     double getvaluebyvar(string var);
+    unsigned long int getPathNum();
+    void setPathNum(unsigned long int pNum);
 };
 
 

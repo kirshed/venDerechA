@@ -43,6 +43,7 @@ void LexParse::lexer(vector<string> lines) {
     //for every Command Expression send to calculate func
     for (CommandExpression *c: commands) {
         c->calculate();
+        cout<<"finished command"<<endl;
     }
 }
 
@@ -325,7 +326,9 @@ vector<CommandExpression *> LexParse::parser(map<int, vector<string>> commandsMa
             queue<string> args;
             args.push((*it).second.at(1));
             commandVector.push_back(new CommandExpression(new PrintCommand(args)));
-        } else { // expression in pattern: "breaks = 0" / "rudder = (h0-heading)/20"
+        } else if((*it).second.at(0) == "exit"){
+            //DESTRUCTORS!
+        }else { // expression in pattern: "breaks = 0" / "rudder = (h0-heading)/20"
             queue<string> args;
             args.push((*it).second.at(0));
             args.push((*it).second.at(2));
