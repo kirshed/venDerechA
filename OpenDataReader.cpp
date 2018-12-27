@@ -62,7 +62,7 @@ double OpenDataReader::reader(int new_socket, double readSpeed) {
         perror("ERROR");
     }
     //n = read(new_socket, &c, 1);
-    while(true) {
+    while(!shouldStop) {
         while (c != '\n') {
             if (n < 0) {
                 perror("ERROR");
@@ -76,10 +76,11 @@ double OpenDataReader::reader(int new_socket, double readSpeed) {
         myMu.lock();
         updateMaps(cstr, 0);
         myMu.unlock();
-        cout<< data<< endl;
+        //cout<< data<< endl;
         data = "";
         c = '\0';
         sleep(1/readSpeed);
+        //delete(cstr);
     }
 }
 

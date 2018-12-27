@@ -9,8 +9,8 @@
 #include "Command.h"
 
 class IfCommand: public Command {
-public:
     queue <Expression*> args;
+public:
     IfCommand(queue <Expression*> &ar) : args(ar){
         while(!ar.empty()){
             ar.pop();

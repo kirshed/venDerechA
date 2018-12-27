@@ -16,8 +16,8 @@ using namespace std;
 
 
 class OpenDataServerCommand: public Command {
-public:
     queue <string> args;
+public:
     OpenDataServerCommand(queue <string> &ar) : args(ar){
         while(!ar.empty()){
             ar.pop();

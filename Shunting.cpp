@@ -126,6 +126,7 @@ Expression* Shunting:: evaluate(string exp){
             double myVal = int(data.getSymbolTable().at(valString));
             Expression* exVal = new Number(myVal);
             values.push(exVal);
+            //delete (exVal);
         }
             // Current token is an operator.
         else
@@ -171,7 +172,7 @@ Expression* Shunting:: evaluate(string exp){
         values.push(applyOp(val1, val2, op));
     }
 
-    stack <Expression*> retValues = values;
+    retValues = values;
     // Top of 'values' contains result, return it.
     return retValues.top();
 }

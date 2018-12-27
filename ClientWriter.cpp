@@ -6,9 +6,10 @@
 #include "ClientWriter.h"
 
 mutex myMutex;
+extern bool shouldStop;
 
 double ClientWriter::writeToServer() {
-
+cout<<"shit";
     queue<string> tempArgs = args;
 
     Shunting shunt = Shunting();
@@ -64,7 +65,7 @@ double ClientWriter::writeToServer() {
                 newVars->pop();
                 buffer = "set " + path + " "+ to_string(value) + " \r\n";
                 const char *charBuf = buffer.c_str();
-                cout<< buffer<< endl;
+                //cout<< buffer<< endl;
                 //myMutex.lock();
                 n = write(sockfd, charBuf, strlen(charBuf));
                 //myMutex.unlock();

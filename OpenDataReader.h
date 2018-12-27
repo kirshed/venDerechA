@@ -14,6 +14,7 @@
 using namespace std;
 
 extern mapsData data;
+extern bool shouldStop;
 
 class OpenDataReader {
 public:

@@ -7,6 +7,8 @@
 
 #include "CommandExpression.h"
 
+bool shouldStop = false;
+
 mapsData data = mapsData();
 
 /*int main() {
@@ -68,7 +70,7 @@ int main(int argc, char *argv[]) {
         cout << s << endl;
     }
 
-    while (true){};
+   // while (true){};
 
     return 0;
 }

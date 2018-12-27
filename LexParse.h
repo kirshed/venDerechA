@@ -16,11 +16,14 @@
 
 using namespace std;
 
+extern bool shouldStop;
 
 class LexParse {
-public:
     map<int, vector<string>> commandsMap;
     map<char, int> sign;
+    vector<CommandExpression *> delCom;
+    vector<CommandExpression *> delCVec;
+public:
 
     LexParse() {
 

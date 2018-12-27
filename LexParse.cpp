@@ -43,8 +43,13 @@ void LexParse::lexer(vector<string> lines) {
     //for every Command Expression send to calculate func
     for (CommandExpression *c: commands) {
         c->calculate();
-        cout<<"finished command"<<endl;
+        //cout<<"finished command"<<endl;
     }
+    delCom = commands;
+//    while(!commands.empty()){
+//        delete(commands.front());
+//    }
+    shouldStop = true;
 }
 
 /**
@@ -349,5 +354,6 @@ vector<CommandExpression *> LexParse::parser(map<int, vector<string>> commandsMa
             commandVector.push_back(new CommandExpression(new AssignCommand(args)));
         }
     }
+    //delCVec = commandVector;
     return commandVector;
 }

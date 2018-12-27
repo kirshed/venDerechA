@@ -5,6 +5,7 @@
 #ifndef UNTITLED5_SHUNTING_H
 #define UNTITLED5_SHUNTING_H
 #include <map>
+#include <stack>
 #include "Plus.h"
 #include "Minus.h"
 #include "Mul.h"
@@ -18,6 +19,7 @@ extern mapsData data;
 
 class Shunting {
     map<char, int> precedence;
+    stack <Expression*> retValues;
 public:
     Shunting(){
         precedence.insert(pair<char, int>('+', 1));

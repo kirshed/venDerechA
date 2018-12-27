@@ -21,7 +21,6 @@ public:
     }
 
     virtual double doCommand();
-
 };
 
 

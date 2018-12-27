@@ -15,6 +15,7 @@
 #include "OpenDataServerCommand.h"
 
 using namespace std;
+extern bool notStop;
 
 
 void OpenDataServerCommand:: openReader(int new_socket, double readSpeed){
