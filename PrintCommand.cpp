@@ -14,7 +14,7 @@ double PrintCommand::doCommand() {
     unsigned long int x = -1;
     //there are " in the string which means i just need to pront the sentect as is
     if(gersh !=x){
-        strPrint = strPrint.substr(gersh+1, strPrint.size()-1);
+        strPrint = strPrint.substr(gersh+1, strPrint.size()-2);
         cout <<strPrint <<endl;
         return 0;
     }

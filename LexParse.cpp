@@ -176,6 +176,20 @@ vector<string> LexParse::fromStringToExp(vector<string> str) {
             expressions.push_back((*it));
         } else if ((*it) == "=") {
             expressions.push_back((*it));
+            it++;
+            if((*it) == "bind"){
+                expressions.push_back(*it);
+            }
+            else{
+                it--;
+            }
+            //added from this row till next expressions.push_back(ex); to fix assign
+            string ex;
+            while(++it!= str.end()){
+                ex+=(*it);
+            }
+            it--;
+            expressions.push_back(ex);
         } else if ((*it) == "{") { continue; }
         else if ((*it) == "}") {
             expressions.push_back(*it);
@@ -327,7 +341,7 @@ vector<CommandExpression *> LexParse::parser(map<int, vector<string>> commandsMa
             args.push((*it).second.at(1));
             commandVector.push_back(new CommandExpression(new PrintCommand(args)));
         } else if((*it).second.at(0) == "exit"){
-            //DESTRUCTORS!
+            exit(0);
         }else { // expression in pattern: "breaks = 0" / "rudder = (h0-heading)/20"
             queue<string> args;
             args.push((*it).second.at(0));
