@@ -9,7 +9,7 @@ mutex myMutex;
 extern bool shouldStop;
 
 double ClientWriter::writeToServer() {
-cout<<"shit";
+//cout<<"shit";
     queue<string> tempArgs = args;
 
     Shunting shunt = Shunting();
